@@ -1,0 +1,35 @@
+# Private/local evidence
+_private/
+screenshots-redacted/
+evidence-package/raw/
+
+# Application and admissions materials
+resume-materials/
+*.docx
+*.pdf
+实施方案.md
+收尾清单.md
+report-outline.md
+report-draft.md
+rendered-report/
+rendered-report-word/
+rendered-report*/
+scripts/build_course_report_docx.py
+scripts/build_course_report_inplace_template.py
+scripts/build_course_report_template_preserved.py
+scripts/render_docx.py
+
+# Secrets and local configs
+.env
+.env.*
+*.pem
+*.key
+id_*
+openclaw.json
+authorized_keys
+known_hosts
+
+# OS/editor noise
+Thumbs.db
+Desktop.ini
+.DS_Store

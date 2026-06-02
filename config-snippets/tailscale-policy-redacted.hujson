@@ -1,0 +1,18 @@
+// Redacted Tailscale Access Controls used for the lab.
+// Device names and IPs are lab-local identifiers; replace them if reused.
+{
+  "hosts": {
+    "windows-client": "<windows-tailscale-ip>",
+    "agent-secure": "<ubuntu-tailscale-ip>"
+  },
+
+  "grants": [
+    {
+      "src": ["windows-client"],
+      "dst": ["agent-secure"],
+      "ip": ["tcp:22"]
+    }
+  ],
+
+  "ssh": []
+}

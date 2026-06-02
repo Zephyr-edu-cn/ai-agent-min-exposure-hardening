@@ -1,0 +1,40 @@
+flowchart LR
+  subgraph client["Windows Client"]
+    key["OpenSSH key auth"]
+    tsclient["Tailscale client\n<windows-tailscale-ip>"]
+    browser["Browser / terminal"]
+  end
+
+  subgraph tailnet["Tailscale Tailnet"]
+    grant["ACL/Grants:\nwindows-client -> agent-secure tcp:22\nssh: []"]
+  end
+
+  subgraph vm["Ubuntu VM: agent-secure"]
+    sshd["OpenSSH sshd\n:22\npubkey only\nAllowGroups ssh-admins"]
+    ufw["UFW\ndefault deny incoming\nallow tailscale0:22\nallow <vmware-nat-host-ip> -> 22"]
+    fail2ban["Fail2ban\nsshd jail"]
+    deploy["deploy\nsudo + ssh-admins"]
+    openclaw_user["openclaw service account\nno sudo / no ssh-admins"]
+    cockpit["Cockpit\n127.0.0.1:9090\n[::1]:9090"]
+    gateway["OpenClaw Gateway\n127.0.0.1:18789\n[::1]:18789\ntoken auth"]
+    systemd["systemd service\nopenclaw-gateway\nenabled / active"]
+  end
+
+  blocked["Blocked direct access\n9090 / 18789 via NAT or Tailnet"]
+
+  key --> browser
+  browser -->|"ssh deploy@<ubuntu-tailscale-ip>"| tsclient
+  tsclient --> grant
+  grant --> sshd
+  sshd --> deploy
+  ufw --> sshd
+  fail2ban --> sshd
+
+  browser -->|"ssh -L 9090:127.0.0.1:9090"| cockpit
+  browser -->|"ssh -L 18789:127.0.0.1:18789"| gateway
+
+  openclaw_user --> systemd
+  systemd --> gateway
+
+  blocked -.-> cockpit
+  blocked -.-> gateway

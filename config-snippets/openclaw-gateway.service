@@ -1,0 +1,21 @@
+[Unit]
+Description=OpenClaw Gateway (loopback-only)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=openclaw
+Group=openclaw
+WorkingDirectory=/opt/openclaw
+Environment=PATH=/opt/openclaw/.openclaw/bin:/opt/openclaw/.openclaw/node/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+Environment=OPENCLAW_NO_RESPAWN=1
+Environment=NODE_COMPILE_CACHE=/opt/openclaw/.openclaw/node-compile-cache
+ExecStartPre=/usr/bin/mkdir -p /opt/openclaw/.openclaw/node-compile-cache
+ExecStart=/opt/openclaw/.openclaw/bin/openclaw gateway run --bind loopback --port 18789 --auth token --tailscale off
+Restart=on-failure
+RestartSec=5
+NoNewPrivileges=true
+
+[Install]
+WantedBy=multi-user.target

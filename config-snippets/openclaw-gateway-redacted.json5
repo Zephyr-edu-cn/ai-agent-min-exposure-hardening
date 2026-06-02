@@ -1,0 +1,17 @@
+{
+  // Example only. Use the actual OpenClaw config format required by your installed version.
+  "gateway": {
+    "bind": "127.0.0.1",
+    "port": 18789,
+    "auth": {
+      "type": "token",
+      "token": "REDACTED_STRONG_RANDOM_TOKEN"
+    }
+  },
+  "security": {
+    "publicExposure": false,
+    "tailscaleFunnel": false,
+    "allowedToolScope": "minimal",
+    "apiKeyStorage": "service-user-readable env/config file, redacted in report"
+  }
+}
