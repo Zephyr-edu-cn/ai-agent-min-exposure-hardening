@@ -1,8 +1,8 @@
-# 大模型智能体应用的最小暴露面部署与安全边界验证
+# 自托管智能体应用的最小暴露面部署与安全边界验证
 
 ## 项目目标
 
-本项目面向自托管大模型智能体应用的安全部署场景，构建并验证一个最小暴露面的访问架构。项目重点不是模型效果，而是智能体系统在真实落地时的身份边界、网络边界、服务账号边界、管理面暴露面和 Gateway 认证边界。
+本项目面向自托管智能体应用的安全部署场景，构建并验证一个最小暴露面的访问架构。项目重点不是模型效果，而是智能体系统在真实落地时的身份边界、网络边界、服务账号边界、管理面暴露面和 Gateway 认证边界。
 
 ## 封版状态
 
@@ -27,6 +27,7 @@
 
 - [evidence-package/evidence-index.md](evidence-package/evidence-index.md)：证据索引，说明每类证据证明什么。
 - [evidence-package/tests/final-hardening-review.md](evidence-package/tests/final-hardening-review.md)：最终 OpenSSH / UFW / Tailscale / Fail2Ban / 端口暴露核查。
+- [evidence-package/tests/windows-ssh-client-alias.md](evidence-package/tests/windows-ssh-client-alias.md)：Windows SSH 别名、有效参数与现场登录复测。
 - [report.md](report.md)：实验报告正文。
 - [risk-analysis.md](risk-analysis.md)：威胁模型、当前控制与剩余风险。
 - [参考资料.md](参考资料.md)：参考文献和引用边界。
@@ -66,13 +67,13 @@ Ubuntu Server: agent-secure
 Windows 侧访问面回归：
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File D:\Agent\agent-min-exposure-project\scripts\check-access-matrix.ps1
+powershell -ExecutionPolicy Bypass -File .\scripts\check-access-matrix.ps1
 ```
 
 脚本会验证：
 
 - NAT 应急 SSH 可达。
-- Tailnet SSH 可达。
+- OpenSSH via Tailnet 可达。
 - NAT/Tailnet 直连 Cockpit 失败。
 - NAT/Tailnet 直连 OpenClaw Gateway 失败。
 - OpenSSH 公钥登录成功。

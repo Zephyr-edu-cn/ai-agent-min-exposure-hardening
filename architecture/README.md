@@ -14,4 +14,4 @@
 
 ## Caption
 
-图：大模型智能体应用最小暴露面访问架构。SSH 是唯一远程入口，受 OpenSSH 公钥认证、`AllowGroups`、UFW、Tailscale ACL/Grants 和 Fail2ban 共同约束；Cockpit 与 OpenClaw Gateway 均为 loopback-only，只能通过 SSH 本地端口转发访问。
+图：自托管智能体应用最小暴露面访问架构。SSH 是唯一远程入口，受 OpenSSH 公钥认证、`AllowGroups`、UFW、Tailscale ACL/Grants 和 Fail2ban 共同约束；Cockpit 与 OpenClaw Gateway 均为 loopback-only，只能通过 SSH 本地端口转发访问。

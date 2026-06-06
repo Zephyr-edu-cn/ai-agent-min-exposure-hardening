@@ -12,7 +12,7 @@ This project can be published as a sanitized engineering-security validation pro
 - `risk-analysis.md`
 - `参考资料.md`
 - `report.md`
-- `evidence-package/tests/final-hardening-review.md`
+- `evidence-package/tests/`
 - `evidence-package/evidence-index.md` if raw paths are kept as references only
 
 ## Keep Private
@@ -36,7 +36,7 @@ This project can be published as a sanitized engineering-security validation pro
 
 For resume materials, cite the project as:
 
-> 大模型智能体应用的最小暴露面部署与安全边界验证
+> 自托管智能体应用的最小暴露面部署与安全边界验证
 
 Recommended keywords:
 

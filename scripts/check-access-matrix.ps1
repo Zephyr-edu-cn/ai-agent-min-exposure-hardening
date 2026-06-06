@@ -130,7 +130,7 @@ $nat22 = Test-TcpFast $NatHost 22
 Add-Check "NAT emergency SSH TCP" "reachable from VMware host" "Tcp=$nat22" ($nat22 -eq $true)
 
 $tail22 = Test-TcpFast $TailnetHost 22
-Add-Check "Tailnet SSH TCP" "reachable" "Tcp=$tail22" ($tail22 -eq $true)
+Add-Check "OpenSSH via Tailnet TCP" "reachable" "Tcp=$tail22" ($tail22 -eq $true)
 
 $natCockpit = Test-TcpFast $NatHost 9090
 Add-Check "NAT direct Cockpit" "blocked" "Tcp=$natCockpit" ($natCockpit -eq $false)

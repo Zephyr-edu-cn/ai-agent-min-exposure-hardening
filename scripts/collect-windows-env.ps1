@@ -1,3 +1,7 @@
+param(
+    [string]$VmxPath = ""
+)
+
 $ErrorActionPreference = "Continue"
 
 $Root = Split-Path -Parent $PSScriptRoot
@@ -37,13 +41,14 @@ Run "Tailscale version" { if (Get-Command tailscale -ErrorAction SilentlyContinu
 Run "TPM status" { Get-Tpm }
 Run "VMware vmrun command" { Get-Command vmrun -ErrorAction SilentlyContinue | Select-Object Source,Version }
 
-$KnownVmx = "E:\pwn\ubuntuPwn\ubuntuPwn.vmx"
-Run "VMware ubuntuPwn vmx summary" {
-    if (Test-Path -LiteralPath $KnownVmx) {
-        Get-Content -LiteralPath $KnownVmx |
+Run "VMware VMX summary (optional)" {
+    if ($VmxPath -and (Test-Path -LiteralPath $VmxPath)) {
+        Get-Content -LiteralPath $VmxPath |
             Select-String -Pattern "displayName|guestOS|memsize|numvcpus|cpuid.coresPerSocket|ethernet0.connectionType|scsi0:0.fileName|sata0:1.fileName|usb.present"
+    } elseif ($VmxPath) {
+        "VMX file not found at the supplied path"
     } else {
-        "VMX file not found at $KnownVmx"
+        "VMX collection skipped; pass -VmxPath to include a local VM summary"
     }
 }
 

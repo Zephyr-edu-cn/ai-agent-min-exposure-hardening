@@ -1,17 +1,21 @@
 {
-  // Example only. Use the actual OpenClaw config format required by your installed version.
-  "gateway": {
-    "bind": "127.0.0.1",
+  // Sanitized evidence summary, not a drop-in OpenClaw configuration file.
+  "effectiveGateway": {
+    "bind": "loopback",
     "port": 18789,
     "auth": {
       "type": "token",
-      "token": "REDACTED_STRONG_RANDOM_TOKEN"
-    }
+      "token": "<redacted>"
+    },
+    "tailscaleExposure": "off"
   },
-  "security": {
-    "publicExposure": false,
-    "tailscaleFunnel": false,
-    "allowedToolScope": "minimal",
-    "apiKeyStorage": "service-user-readable env/config file, redacted in report"
+  "credentialBoundary": {
+    "modelApiKeyConfigured": false,
+    "gatewayTokenStorage": "plaintext secret-bearing config with file mode 600"
+  },
+  "remainingRisk": {
+    "toolsElevated": "enabled",
+    "browserControl": "enabled",
+    "recommendedAction": "disable unnecessary capabilities or configure an explicit allowlist before model integration"
   }
 }

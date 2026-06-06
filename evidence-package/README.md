@@ -5,19 +5,19 @@
 ## 目录结构
 
 ```text
-architecture/
 raw/
-screenshots-redacted/
-config-snippets/
 tests/
+../architecture/
+../config-snippets/
+../screenshots-public-redacted/
 ```
 
 ## 最低证据清单
 
 - Windows 环境：`scripts/collect-windows-env.ps1` 输出。
 - Ubuntu 环境：`scripts/collect-ubuntu-env.sh` 输出。
-- 架构图：展示 Windows、SSH、Tailscale、Ubuntu VM、Cockpit/Webmin、OpenClaw Gateway。
-- SSH 加固配置：`99-hardening.conf` 脱敏副本。
+- 架构图：展示 Windows、SSH、Tailscale、Ubuntu VM、Cockpit 与 OpenClaw Gateway。
+- SSH 加固配置：`00-agent-lab-hardening.conf` 的脱敏片段。
 - UFW 状态：`sudo ufw status verbose`。
 - Tailscale 状态：`tailscale status` 和 `tailscale ip -4`。
 - Fail2ban 状态：`sudo fail2ban-client status sshd`。
@@ -31,7 +31,7 @@ tests/
 Windows 侧访问面回归：
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File D:\Agent\agent-min-exposure-project\scripts\check-access-matrix.ps1
+powershell -ExecutionPolicy Bypass -File .\scripts\check-access-matrix.ps1
 ```
 
 输出：
@@ -61,6 +61,12 @@ tests/final-hardening-review.md
 
 ```text
 tests/access-matrix.md
+```
+
+Windows SSH 客户端别名与现场复测见：
+
+```text
+tests/windows-ssh-client-alias.md
 ```
 
 | 测试对象 | 测试内容 | 预期结果 | 实际结果 |

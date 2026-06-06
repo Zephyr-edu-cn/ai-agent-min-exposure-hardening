@@ -113,6 +113,8 @@ loglevel VERBOSE
 
 证据材料包括 `config-snippets/sshd-hardening.conf`、`screenshots-public-redacted/01_sshd_T_effective_config.png` 和 `evidence-package/tests/final-hardening-review.md`。
 
+Windows 客户端已在 `~/.ssh/config` 中设置 `agent-secure`（Tailnet 主路径）与 `agent-secure-nat`（VMware NAT 应急路径）两个主机别名，固定 `User deploy` 和专用 `IdentityFile`，并设置 `IdentitiesOnly yes`、`ForwardAgent no`。脱敏后的配置、`ssh -G` 解析结果与现场登录复测见 `evidence-package/tests/windows-ssh-client-alias.md`。
+
 ### 5.3 UFW、Tailscale 与 Fail2Ban
 
 UFW 采用默认拒绝入站策略，仅允许必要 SSH 入口。Tailscale ACL/Grants 限制为指定 Windows 客户端访问 Ubuntu 服务器 `tcp:22`，并在策略中禁用 Tailscale SSH，避免产生另一条独立登录控制面。UFW 和 Tailscale 的策略依据分别参考 Ubuntu UFW 文档与 Tailscale ACL/Policy syntax 文档 [4]-[6]。
@@ -143,7 +145,7 @@ OpenClaw Gateway 由 systemd 服务持久化运行，监听地址限制为：
 
 Gateway 侧启用 token 认证，并关闭直接 Tailscale 暴露选项。客户端访问时使用 SSH local port forwarding，将本地端口映射到服务器 loopback Gateway。未带 token 或 scope 不足的请求会被拒绝，实验中观察到 `token_missing` 和 `missing scope: operator.read` 等拒绝结果。
 
-OpenClaw audit 最终结果为 `0 critical · 2 warn · 1 info`。两个 warning 不作为当前最小暴露面目标的硬性失败，而作为剩余风险记录：一方面，Gateway 已限制为 loopback-only；另一方面，token 明文配置和 scope 探测结果仍需要在风险分析中说明，并作为后续 SecretRefs、最小工具集和审计增强的改进方向。
+OpenClaw audit 最终结果为 `0 critical · 2 warn · 1 info`。其中 `gateway.trusted_proxies_missing` 在当前 loopback-only、无反向代理架构下不构成直接暴露；`gateway.probe_failed` 的 `missing scope: operator.read` 表明探针未获得操作员读取权限。审计同时显示 `tools.elevated` 与 `browser control` 仍处于 enabled 状态，因此在实际接入模型前仍需关闭非必要能力或配置显式 allowlist。
 
 ## 6. 验证方法与结果
 
@@ -154,7 +156,7 @@ OpenClaw audit 最终结果为 `0 critical · 2 warn · 1 info`。两个 warning
 | `deploy` 公钥登录 | 成功 | 成功 |
 | `deploy` 密码登录 | 失败 | `Permission denied (publickey)` |
 | `root` 登录 | 失败 | `Permission denied (publickey)` |
-| Tailnet SSH | 成功 | 成功 |
+| OpenSSH via Tailnet | 成功 | 成功 |
 | NAT 应急 SSH | 成功 | 成功 |
 | NAT 直连 Cockpit | 失败 | 失败 |
 | Tailnet 直连 Cockpit | 失败 | 失败 |
@@ -245,5 +247,4 @@ FAIL：
 
 [16] OpenClaw. Remote access[EB/OL]. [2026-06-01]. https://docs.openclaw.ai/gateway/remote.
 
-[17] OpenClaw. Remote control[EB/OL]. [2026-06-01]. https://docs.openclaw.ai/platforms/mac/remote.
-
+[17] OpenClaw. Security[EB/OL]. [2026-06-01]. https://docs.openclaw.ai/gateway/security.

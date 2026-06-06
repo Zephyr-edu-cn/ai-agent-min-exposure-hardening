@@ -39,7 +39,7 @@
 |---|---|---|---|
 | Windows Tailscale | `tailscale version; tailscale ip -4; tailscale status` | Windows 加入 Tailnet | 版本 `1.98.4`，IP `<windows-tailscale-ip>`，设备在线 |
 | Ubuntu Tailscale | `tailscale version; tailscale ip -4; tailscale status; ip -br addr` | Ubuntu 加入同一 Tailnet | 版本 `1.98.4`，IP `<ubuntu-tailscale-ip>`，`tailscale0` 存在 |
-| Tailscale OpenSSH | `ssh -i <key> deploy@<ubuntu-tailscale-ip> "whoami; hostname; id"` | 成功，仍使用 OpenSSH 公钥认证 | 成功，输出 `deploy`、`agent-secure`、`ssh-admins` |
+| OpenSSH via Tailnet | `ssh -i <key> deploy@<ubuntu-tailscale-ip> "whoami; hostname; id"` | 成功，仍使用 OpenSSH 公钥认证 | 成功，输出 `deploy`、`agent-secure`、`ssh-admins` |
 | Tailscale SSH | `sudo tailscale up --ssh=false` | 不启用 Tailscale SSH 作为主认证 | 已禁用，实验主认证仍为 OpenSSH 公钥 |
 | UFW 收敛 | `sudo ufw status verbose` | SSH 入口限制为 `tailscale0` 与本机 NAT 应急地址 | `22/tcp on tailscale0 ALLOW IN Anywhere`，`22/tcp ALLOW IN <vmware-nat-host-ip>`，无 `22/tcp Anywhere` |
 | Fail2ban sshd jail | `sudo fail2ban-client status; sudo fail2ban-client status sshd` | `sshd` jail 启用 | `Number of jail: 1`，`Jail list: sshd`，`Status for the jail: sshd` |
