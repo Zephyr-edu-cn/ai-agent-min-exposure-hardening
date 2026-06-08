@@ -26,7 +26,7 @@
 
 | 测试项 | 命令/方法 | 预期 | 实际 |
 |---|---|---|---|
-| UFW 状态 | `sudo ufw status verbose` | active，默认拒绝入站，只允许 22 | 成功，`Default: deny (incoming), allow (outgoing)`，`22/tcp ALLOW IN` |
+| UFW 状态 | `sudo ufw status verbose` | active，默认拒绝入站，仅保留 Tailscale 接口 SSH 与 VMware NAT 宿主机应急 SSH | 成功，`Default: deny (incoming), allow (outgoing)`，`22/tcp on tailscale0 ALLOW IN Anywhere`，`22/tcp ALLOW IN <vmware-nat-host-ip>`，无 `22/tcp Anywhere` |
 | SSH 直连 | `Test-NetConnection <ubuntu-vm-nat-ip> -Port 22` | 成功 | `TcpTestSucceeded : True` |
 | Cockpit 监听 | `systemctl status cockpit.socket --no-pager; ss -tulpn \| grep 9090` | 只监听回环地址 | `127.0.0.1:9090` 与 `[::1]:9090` |
 | Cockpit NAT 直连 | `Test-NetConnection <ubuntu-vm-nat-ip> -Port 9090` | 失败 | `TcpTestSucceeded : False` |

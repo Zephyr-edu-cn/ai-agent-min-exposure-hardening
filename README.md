@@ -117,9 +117,11 @@ evidence-package/raw/10-server-state.txt
 | OpenClaw insufficient scope | `missing scope: operator.read` |
 | `openclaw-gateway` after reboot | `enabled` / `active` |
 
-## 材料价值
+说明：`check-access-matrix.ps1` 主要覆盖网络可达性、SSH 认证和 SSH tunnel 路径；OpenClaw no-token 与 insufficient-scope 拒绝结果来自脱敏日志、audit 输出或手工 HTTP 验证记录。
 
-本项目可以支撑“可靠 AI 工程 / AI 基础设施 / 安全可靠软件工程”方向叙事：
+## 工程价值
+
+本项目展示了自托管智能体应用部署中的访问面收敛、权限边界设计和可复查安全验证流程：
 
 - 不只关注智能体能否运行，也关注运行边界是否可控。
 - 将 SSH、UFW、Tailscale、Cockpit、OpenClaw Gateway 组合为可验证的访问架构。
