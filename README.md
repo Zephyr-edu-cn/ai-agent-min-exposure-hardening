@@ -23,7 +23,7 @@
 | 服务账号 | `openclaw` |
 | OpenClaw | `OpenClaw 2026.5.28 (e932160)` |
 
-## 材料入口
+## 仓库导航
 
 - [evidence-package/evidence-index.md](evidence-package/evidence-index.md)：证据索引，说明每类证据证明什么。
 - [evidence-package/tests/final-hardening-review.md](evidence-package/tests/final-hardening-review.md)：最终 OpenSSH / UFW / Tailscale / Fail2Ban / 端口暴露核查。
@@ -130,7 +130,7 @@ evidence-package/raw/10-server-state.txt
 
 ## 敏感信息处理
 
-提交报告或材料时必须脱敏：
+公开仓库和报告归档前必须脱敏：
 
 - 不提交 SSH 私钥。
 - 不展示 OpenClaw Gateway token。
