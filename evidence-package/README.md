@@ -44,7 +44,7 @@ raw/09-access-matrix.json
 Ubuntu 侧服务状态采集：
 
 ```bash
-bash check-server-state.sh | tee raw/10-server-state.txt
+bash scripts/check-server-state.sh | tee evidence-package/raw/10-server-state.txt
 ```
 
 报告引用脚本输出摘要，不粘贴敏感 token、API Key 或完整个人账号信息。
