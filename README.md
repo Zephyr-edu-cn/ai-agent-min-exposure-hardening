@@ -25,6 +25,7 @@
 
 ## 仓库导航
 
+- [docs/verification_workflow.md](docs/verification_workflow.md): boundary verification workflow and evidence mapping.
 - [evidence-package/evidence-index.md](evidence-package/evidence-index.md)：证据索引，说明每类证据证明什么。
 - [evidence-package/tests/final-hardening-review.md](evidence-package/tests/final-hardening-review.md)：最终 OpenSSH / UFW / Tailscale / Fail2Ban / 端口暴露核查。
 - [evidence-package/tests/windows-ssh-client-alias.md](evidence-package/tests/windows-ssh-client-alias.md)：Windows SSH 别名、有效参数与现场登录复测。
