@@ -1,6 +1,6 @@
 # Public Redacted Screenshots
 
-本目录用于 GitHub、作品集或投递材料中的公开截图。相比 `screenshots-redacted/`，这里进一步遮挡了 Windows 本地路径、私钥文件名、Tailscale/VMware IP、终端用户提示和不必要的主机信息。
+This directory contains sanitized screenshots for public repository documentation and project archival use. Compared with `screenshots-redacted/`, it further masks local Windows paths, private-key filenames, Tailscale/VMware IP addresses, terminal prompts, and unnecessary host information.
 
 ## Files
 

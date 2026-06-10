@@ -22,7 +22,7 @@ This project can be published as a sanitized engineering-security validation pro
 - `_private/`
 - `screenshots-redacted/`
 - `evidence-package/raw/`
-- `resume-materials/`
+- `local-private/`, `private-notes/`
 - course/private `.docx` files
 - any real SSH private key, token, API key, `.env`, `openclaw.json`, or generated local config containing secrets
 

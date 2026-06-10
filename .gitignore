@@ -3,8 +3,9 @@ _private/
 screenshots-redacted/
 evidence-package/raw/
 
-# Application and admissions materials
-resume-materials/
+# Local private materials
+local-private/
+private-notes/
 *.docx
 *.pdf
 实施方案.md
