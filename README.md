@@ -92,7 +92,7 @@ evidence-package/raw/09-access-matrix.json
 Ubuntu 侧服务状态采集：
 
 ```bash
-bash /path/to/check-server-state.sh | tee server-state.txt
+bash scripts/check-server-state.sh | tee evidence-package/raw/10-server-state.txt
 ```
 
 输出保存位置：
